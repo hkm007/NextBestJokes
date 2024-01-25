@@ -1,9 +1,12 @@
+import JokeCard from "@/components/JokeCard";
 import styles from "./page.module.css";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className={styles.main}>
-      <h1>NextBestJokes</h1>
+      <div className="joke-area">
+        <JokeCard />
+      </div>
     </main>
   );
 }
