@@ -1,27 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { CUSTOM_JOKE, API_ENDPOINT, HEADERS } from "../config";
 
 function JokeCard() {
   const [joke, setJoke] = useState("");
 
   useEffect(() => {
-    fetch("https://icanhazdadjoke.com/", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
+    fetch(API_ENDPOINT, HEADERS)
       .then((res) => res.json())
-      .then((res2) => {
-        setJoke(res2.joke ?? "");
+      .then((jokeResponse) => {
+        setJoke(jokeResponse.joke ?? CUSTOM_JOKE);
       })
       .catch((err) => {
-        alert(err);
-        setJoke("Something went wrong...");
+        console.log(err);
+        setJoke(CUSTOM_JOKE);
       });
   }, []);
 
   return (
-    <div className="card col-lg-6 mx-auto my-5">
+    <div className="card">
       <div className="card-body">
         <i style={{ color: "grey", fontWeight: "bold", fontSize: "20px" }}>
           {joke}
