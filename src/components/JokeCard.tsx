@@ -9,7 +9,7 @@ function JokeCard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       setLoading(false);
     };
 
@@ -29,34 +29,43 @@ function JokeCard() {
   }, [refresh]);
 
   const handleRefresh = () => {
-    setRefresh(!refresh); 
+    setRefresh(!refresh);
   };
 
   return (
     <div className="container">
-       { loading ? (
-       <div className="spinner">
-      <div className="spinner-border text-primary justify-center" role="status">
-      <span className="sr-only"></span>
+      {loading ? (
+        <div className="spinner">
+          <div
+            className="spinner-border text-primary justify-center"
+            role="status"
+          >
+            <span className="sr-only"></span>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="card">
+            <div className="card-body">
+              <i
+                style={{ color: "grey", fontWeight: "bold", fontSize: "20px" }}
+              >
+                {joke}
+              </i>
+            </div>
+          </div>
+          <div className="refreshButton">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleRefresh}
+            >
+              Refresh
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-    </div>
-          ) : (
-    <div>        
-    <div className="card">
-     
-      <div className="card-body">
-        <i style={{ color: "grey", fontWeight: "bold", fontSize: "20px" }}>
-          {joke}
-        </i>
-      </div> 
-    </div>
-    <div className="refreshButton">
-    <button type="button" className="btn btn-primary" onClick={handleRefresh}>
-    Refresh
-  </button>
-  </div>
-  </div>)}
-  </div>
   );
 }
 
