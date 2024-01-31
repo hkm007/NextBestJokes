@@ -8,30 +8,18 @@ function JokeCard() {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [refresh]);
-
-  useEffect(() => {
     fetch(API_ENDPOINT, HEADERS)
       .then((res) => res.json())
       .then((jokeResponse) => {
+        setLoading(false);
         setJoke(jokeResponse.joke ?? CUSTOM_JOKE);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
         setJoke(CUSTOM_JOKE);
       });
   }, [refresh]);
-
-  const handleRefresh = () => {
-    setRefresh(!refresh);
-    setLoading(!loading)
-  };
 
   return (
     <div className="container">
@@ -59,7 +47,7 @@ function JokeCard() {
             <button
               type="button"
               className="btn btn-success"
-              onClick={handleRefresh}
+              onClick={() => {setRefresh(!refresh)}}
             >
               Get New Joke
             </button>
