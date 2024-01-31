@@ -22,7 +22,7 @@ function JokeCard() {
   }, [refresh]);
 
   return (
-    <div className="container">
+    <>
       {loading ? (
         <div className="spinner">
           <div
@@ -47,14 +47,14 @@ function JokeCard() {
             <button
               type="button"
               className="btn btn-success"
-              onClick={() => {setRefresh(!refresh)}}
+              onClick={() => setRefresh(!refresh)}
             >
               Get New Joke
             </button>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
