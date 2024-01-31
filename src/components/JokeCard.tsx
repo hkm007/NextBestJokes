@@ -9,12 +9,12 @@ function JokeCard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       setLoading(false);
     };
 
     fetchData();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     fetch(API_ENDPOINT, HEADERS)
@@ -30,6 +30,7 @@ function JokeCard() {
 
   const handleRefresh = () => {
     setRefresh(!refresh);
+    setLoading(!loading)
   };
 
   return (
@@ -37,7 +38,7 @@ function JokeCard() {
       {loading ? (
         <div className="spinner">
           <div
-            className="spinner-border text-primary justify-center"
+            className="spinner-border text-success justify-center"
             role="status"
           >
             <span className="sr-only"></span>
@@ -57,10 +58,10 @@ function JokeCard() {
           <div className="refreshButton">
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-success"
               onClick={handleRefresh}
             >
-              Refresh
+              Get New Joke
             </button>
           </div>
         </div>
